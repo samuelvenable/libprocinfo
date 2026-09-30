@@ -38,18 +38,18 @@ int main() {
     char *exe_buf = exe_from_procid(pid_buf[i]);
     if (exe_buf) {
       printf("%s%zu%s%lu%s%s\n", "pid[", i, "]: ", (unsigned long)pid_buf[i], ", exe: ", exe_buf);
-      exe_free(exe_buf);
     }
+    exe_free(exe_buf);
     char *cwd_buf = cwd_from_procid(pid_buf[i]);
     if (cwd_buf) {
       printf("%s%zu%s%lu%s%s\n", "pid[", i, "]: ", (unsigned long)pid_buf[i], ", cwd: ", cwd_buf);
-      cwd_free(cwd_buf);
     }
+    cwd_free(cwd_buf);
     char *comm_buf = comm_from_procid(pid_buf[i]);
     if (comm_buf) {
       printf("%s%zu%s%lu%s%s\n", "pid[", i, "]: ", (unsigned long)pid_buf[i], ", comm: ", comm_buf);
-      comm_free(comm_buf);
     }
+    comm_free(comm_buf);
     procid_t *ppid_buf = nullptr;
     std::size_t ppid_len = 0;
     pprocid_from_procid(pid_buf[i], &ppid_buf, &ppid_len);
