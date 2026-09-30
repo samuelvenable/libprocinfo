@@ -26,7 +26,7 @@ SOFTWARE.
 
 #include <libprocinfo/libprocinfo.hpp>
 #if defined(__libprocinfo_supported__)
-#include <stdio.h>
+#include <cstdio>
 #endif
 int main() {
   #if defined(__libprocinfo_supported__)
