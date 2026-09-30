@@ -30,7 +30,7 @@ SOFTWARE.
 #endif
 int main() {
   #if defined(__libprocinfo_supported__)
-  procid_t *pid_buf = 0; 
+  procid_t *pid_buf = nullptr;
   std::size_t pid_len = 0; 
   procid_enum(&pid_buf, &pid_len);
   for (std::size_t i = 0; i < pid_len; i++) {
@@ -50,28 +50,28 @@ int main() {
       printf("%s%zu%s%lu%s%s\n", "pid[", i, "]: ", (unsigned long)pid_buf[i], ", comm: ", comm_buf);
       comm_free(comm_buf);
     }
-    procid_t *ppid_buf = 0; 
+    procid_t *ppid_buf = nullptr;
     std::size_t ppid_len = 0;
     pprocid_from_procid(pid_buf[i], &ppid_buf, &ppid_len);
     for (std::size_t j = 0; j < ppid_len; j++) {
       printf("%s%zu%s%lu%s%lu\n", "pid[", i, "]: ", (unsigned long)pid_buf[i], ", ppid: ", (unsigned long)ppid_buf[j]);
     }
     pprocid_free(ppid_buf);
-    procid_t *cpid_buf = 0; 
+    procid_t *cpid_buf = nullptr;
     std::size_t cpid_len = 0;
     procid_from_pprocid(pid_buf[i], &cpid_buf, &cpid_len);
     for (std::size_t j = 0; j < cpid_len; j++) {
       printf("%s%zu%s%lu%s%zu%s%lu\n", "pid[", i, "]: ", (unsigned long)pid_buf[i], ", cpid[", j, "]: ", (unsigned long)cpid_buf[j]);
     }
     procid_free(cpid_buf);
-    char **cmd_buf;
+    char **cmd_buf = nullptr;
     std::size_t cmd_len = 0;
     cmdline_from_procid(pid_buf[i], &cmd_buf, &cmd_len);
     for (std::size_t j = 0; j < cmd_len; j++) {
       printf("%s%zu%s%lu%s%zu%s%s\n", "pid[", i, "]: ", (unsigned long)pid_buf[i], ", cmd[", j, "]: ", cmd_buf[j]);
     }
     cmdline_free(cmd_buf, cmd_len);
-    char **env_buf;
+    char **env_buf = nullptr;
     std::size_t env_len = 0;
     environ_from_procid(pid_buf[i], &env_buf, &env_len);
     for (std::size_t j = 0; j < env_len; j++) {
