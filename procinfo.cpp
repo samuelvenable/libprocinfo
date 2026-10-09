@@ -26,6 +26,7 @@ SOFTWARE.
 
 #include <libprocinfo/libprocinfo.hpp>
 #if defined(__libprocinfo_supported__)
+#include <cstring>
 #include <cstdio>
 #endif
 int main() {
@@ -36,17 +37,17 @@ int main() {
   for (std::size_t i = 0; i < pid_len; i++) {
     printf("%s%zu%s%lu%s%lu\n", "pid[", i, "]: ", (unsigned long)pid_buf[i], ", pid: ", (unsigned long)pid_buf[i]);
     char *exe_buf = exe_from_procid(pid_buf[i]);
-    if (exe_buf) {
+    if (exe_buf && strlen(exe_buf)) {
       printf("%s%zu%s%lu%s%s\n", "pid[", i, "]: ", (unsigned long)pid_buf[i], ", exe: ", exe_buf);
     }
     exe_free(exe_buf);
     char *cwd_buf = cwd_from_procid(pid_buf[i]);
-    if (cwd_buf) {
+    if (cwd_buf && strlen(cwd_buf)) {
       printf("%s%zu%s%lu%s%s\n", "pid[", i, "]: ", (unsigned long)pid_buf[i], ", cwd: ", cwd_buf);
     }
     cwd_free(cwd_buf);
     char *comm_buf = comm_from_procid(pid_buf[i]);
-    if (comm_buf) {
+    if (comm_buf && strlen(comm_buf)) {
       printf("%s%zu%s%lu%s%s\n", "pid[", i, "]: ", (unsigned long)pid_buf[i], ", comm: ", comm_buf);
     }
     comm_free(comm_buf);
