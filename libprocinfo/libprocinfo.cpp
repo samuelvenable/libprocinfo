@@ -58,7 +58,7 @@ SOFTWARE.
 #include <fileapi.h>
 #include <psapi.h>
 #elif (defined(__APPLE__) && defined(__MACH__))
-#include <sys/procinfo.h>
+#include <sys/proc_info.h>
 #include <mach-o/dyld.h>
 #include <sys/sysctl.h>
 #include <libproc.h>
