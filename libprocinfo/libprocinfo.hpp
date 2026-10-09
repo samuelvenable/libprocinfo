@@ -77,11 +77,11 @@ namespace procinfo {
 #define EXPORTED_FUNCTION extern "C" __attribute__((visibility("default")))
 #endif
 
-EXPORTED_FUNCTION  inline procid_t procid_from_self() {
+EXPORTED_FUNCTION inline procid_t procid_from_self() {
   return procinfo::procid_from_self();
 }
 
-EXPORTED_FUNCTION  inline void procid_enum(procid_t **buf, std::size_t *len) {
+EXPORTED_FUNCTION inline void procid_enum(procid_t **buf, std::size_t *len) {
   std::vector<procid_t> procid = procinfo::procid_enum();
   procid_t *pid = (procid_t *)malloc(procid.size() * sizeof(procid_t));
   if (buf) {
@@ -97,23 +97,23 @@ EXPORTED_FUNCTION inline void procid_enum_free(procid_t *buf) {
   free(buf);
 }
 
-EXPORTED_FUNCTION  inline bool procid_exists(procid_t procid) {
+EXPORTED_FUNCTION inline bool procid_exists(procid_t procid) {
   return procinfo::procid_exists(procid);
 }
 
-EXPORTED_FUNCTION  inline bool procid_suspend(procid_t procid) {
+EXPORTED_FUNCTION inline bool procid_suspend(procid_t procid) {
   return procinfo::procid_suspend(procid);
 }
 
-EXPORTED_FUNCTION  inline bool procid_resume(procid_t procid) {
+EXPORTED_FUNCTION inline bool procid_resume(procid_t procid) {
   return procinfo::procid_resume(procid);
 }
 
-EXPORTED_FUNCTION  inline bool procid_kill(procid_t procid) {
+EXPORTED_FUNCTION inline bool procid_kill(procid_t procid) {
   return procinfo::procid_kill(procid);
 }
 
-EXPORTED_FUNCTION  inline void pprocid_from_procid(procid_t procid, procid_t **buf, std::size_t *len) {
+EXPORTED_FUNCTION inline void pprocid_from_procid(procid_t procid, procid_t **buf, std::size_t *len) {
   std::vector<procid_t> pprocid = procinfo::pprocid_from_procid(procid);
   procid_t *ppid = (procid_t *)malloc(pprocid.size() * sizeof(procid_t));
   if (buf) {
@@ -125,11 +125,11 @@ EXPORTED_FUNCTION  inline void pprocid_from_procid(procid_t procid, procid_t **b
   *len = pprocid.size();
 }
 
-EXPORTED_FUNCTION  inline void pprocid_free(procid_t *pprocid) {
+EXPORTED_FUNCTION inline void pprocid_free(procid_t *pprocid) {
   free(pprocid);
 }
 
-EXPORTED_FUNCTION  inline void procid_from_pprocid(procid_t pprocid, procid_t **buf, std::size_t *len) {
+EXPORTED_FUNCTION inline void procid_from_pprocid(procid_t pprocid, procid_t **buf, std::size_t *len) {
   std::vector<procid_t> procid = procinfo::procid_from_pprocid(pprocid);
   procid_t *pid = (procid_t *)malloc(procid.size() * sizeof(procid_t));
   if (buf) {
@@ -141,35 +141,35 @@ EXPORTED_FUNCTION  inline void procid_from_pprocid(procid_t pprocid, procid_t **
   *len = procid.size();
 }
 
-EXPORTED_FUNCTION  inline void procid_free(procid_t *procid) {
+EXPORTED_FUNCTION inline void procid_free(procid_t *procid) {
   free(procid);
 }
 
-EXPORTED_FUNCTION  inline char *exe_from_procid(procid_t procid) {
+EXPORTED_FUNCTION inline char *exe_from_procid(procid_t procid) {
   return strdup(procinfo::exe_from_procid(procid).c_str());
 }
 
-EXPORTED_FUNCTION  inline void exe_free(char *exe) {
+EXPORTED_FUNCTION inline void exe_free(char *exe) {
   free(exe);
 } 
 
-EXPORTED_FUNCTION  inline char *cwd_from_procid(procid_t procid) {
+EXPORTED_FUNCTION inline char *cwd_from_procid(procid_t procid) {
   return strdup(procinfo::cwd_from_procid(procid).c_str());
 }
 
-EXPORTED_FUNCTION  inline void cwd_free(char *cwd) {
+EXPORTED_FUNCTION inline void cwd_free(char *cwd) {
   free(cwd);
 } 
 
-EXPORTED_FUNCTION  inline char *comm_from_procid(procid_t procid) {
+EXPORTED_FUNCTION inline char *comm_from_procid(procid_t procid) {
   return strdup(procinfo::comm_from_procid(procid).c_str());
 }
 
-EXPORTED_FUNCTION  inline void comm_free(char *comm) {
+EXPORTED_FUNCTION inline void comm_free(char *comm) {
   free(comm);
 } 
 
-EXPORTED_FUNCTION  inline void cmdline_from_procid(procid_t procid, char ***buf, std::size_t *len) {
+EXPORTED_FUNCTION inline void cmdline_from_procid(procid_t procid, char ***buf, std::size_t *len) {
   std::vector<std::string> cmdline = procinfo::cmdline_from_procid(procid);
   *len = cmdline.size();
   char **arr = (char **)malloc(*len * sizeof(char *));
@@ -187,14 +187,14 @@ EXPORTED_FUNCTION  inline void cmdline_from_procid(procid_t procid, char ***buf,
   *buf = arr;
 }
 
-EXPORTED_FUNCTION  inline void cmdline_free(char **buf, std::size_t len) {
+EXPORTED_FUNCTION inline void cmdline_free(char **buf, std::size_t len) {
   for (std::size_t i = 0; i < len; i++) {
     free(buf[i]);
   }
   free(buf);
 }
 
-EXPORTED_FUNCTION  inline void environ_from_procid(procid_t procid, char ***buf, std::size_t *len) {
+EXPORTED_FUNCTION inline void environ_from_procid(procid_t procid, char ***buf, std::size_t *len) {
   std::vector<std::string> environ = procinfo::environ_from_procid(procid);
   *len = environ.size();
   char **arr = (char **)malloc(*len * sizeof(char *));
@@ -212,22 +212,22 @@ EXPORTED_FUNCTION  inline void environ_from_procid(procid_t procid, char ***buf,
   *buf = arr;
 }
 
-EXPORTED_FUNCTION  inline void environ_free(char **buf, std::size_t len) {
+EXPORTED_FUNCTION inline void environ_free(char **buf, std::size_t len) {
   for (std::size_t i = 0; i < len; i++) {
     free(buf[i]);
   }
   free(buf);
 }
 
-EXPORTED_FUNCTION  inline char *envvar_value_from_procid(procid_t procid, const char *name) {
+EXPORTED_FUNCTION inline char *envvar_value_from_procid(procid_t procid, const char *name) {
   return strdup(procinfo::envvar_value_from_procid(procid, name).c_str());
 }
 
-EXPORTED_FUNCTION  inline void envvar_value_free(char *value) {
+EXPORTED_FUNCTION inline void envvar_value_free(char *value) {
   free(value);
 }
 
-EXPORTED_FUNCTION  inline bool envvar_exists_from_procid(procid_t procid, const char *name) {
+EXPORTED_FUNCTION inline bool envvar_exists_from_procid(procid_t procid, const char *name) {
   return procinfo::envvar_exists_from_procid(procid, name);
 }
 #endif
