@@ -51,8 +51,10 @@ typedef int procid_t;
 typedef unsigned long procid_t;
 #endif
 #if defined(__cplusplus)
-#include <vector>
 #include <string>
+#include <vector>
+#include <cstring>
+#include <cstdlib>
 namespace procinfo {
   procid_t procid_from_self();
   std::vector<procid_t> procid_enum();
@@ -70,6 +72,9 @@ namespace procinfo {
   std::string envvar_value_from_procid(procid_t procid, std::string name);
   bool envvar_exists_from_procid(procid_t procid, std::string name);
 } // namespace procinfo
+#else
+#include <string.h>
+#include <stdlib.h>
 #endif
 #if (defined(_WIN32) || defined(_WIN64))
 #define EXPORTED_FUNCTION extern "C" __declspec(dllexport)
